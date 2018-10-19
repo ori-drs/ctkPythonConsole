@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 2.8)
-project(ctkPythonConsole)
+project(ctk_python_console)
+
+find_package(catkin)
+
+catkin_package(
+INCLUDE_DIRS src
+LIBRARIES ${PROJECT_NAME}
+)
 
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
