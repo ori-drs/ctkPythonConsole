@@ -6,6 +6,7 @@ find_package(catkin)
 catkin_package(
 INCLUDE_DIRS src
 LIBRARIES ${PROJECT_NAME}
+CFG_EXTRAS ctk_python_console.cmake
 )
 
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)

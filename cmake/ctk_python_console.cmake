@@ -1,0 +1,6 @@
+set(ctk_python_console_INCLUDE_DIRS_new "")
+foreach(path ${ctk_python_console_INCLUDE_DIRS})
+  list(APPEND ctk_python_console_INCLUDE_DIRS_new ${path})
+  list(APPEND ctk_python_console_INCLUDE_DIRS_new "${path}/ctkPythonConsole")
+endforeach()
+set(ctk_python_console_INCLUDE_DIRS ${ctk_python_console_INCLUDE_DIRS_new})
