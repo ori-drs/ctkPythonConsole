@@ -278,14 +278,16 @@ void ctkAbstractPythonManager::executeFile(const QString& filename)
         << QString("_updated_globals['__file__'] = '%1'").arg(filename)
         << "_ctk_executeFile_exc_info = None"
         << "try:"
-        << QString("    execfile('%1', _updated_globals)").arg(filename)
-        << "except Exception, e:"
+        << QString("    exec(open('%1').read(), _updated_globals)").arg(filename)
+        << "except Exception as e:"
         << "    _ctk_executeFile_exc_info = sys.exc_info()"
         << "finally:"
         << "    del _updated_globals"
         << QString("    if sys.path[0] == '%1': sys.path.pop(0)").arg(path)
         << "    if _ctk_executeFile_exc_info:"
-        << "        raise _ctk_executeFile_exc_info[1], None, _ctk_executeFile_exc_info[2]";
+        << "        e = _ctk_executeFile_exc_info[0](None)"
+        << "        e.__traceback__ = _ctk_executeFile_exc_info[2]"
+        << "        raise e";
     this->executeString(code.join("\n"));
     //PythonQt::self()->handleError(); // Clear errorOccured flag
     }
